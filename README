@@ -1,0 +1,47 @@
+README for Homework 1 BARD assignment, CSE101
+
+Juan-Fernando Morales, 2022
+-----------------------------------------------------
+
+Code files: Makefile, main.cpp, LinkedList.cpp, LinkedList.h, shakespeare-cleaned5.txt
+Test files: deploy.h, test.cpp, 
+Extra files: README, hw_shakespeare.pdf
+
+----------------------------------------------------
+
+Overview of code structure
+LinkedList.cpp, LinkedList.h
+- I made this doubly linked list for a class in 2021, it has plenty of features that i utilized / updated in this assignment.
+- It is a linked list of Node structures, which i updated for this project
+- These updates include:
+  - overloading functions like insert_front, insert_back, insertFromNext, insertFromPrev to take Node<NodeType>* arguments, 
+    as opposed to the ListIterator friend class which i had utilized in a previous project to allow for iteration through the list.
+  - adding the print function to easily see the structure of the list.
+main.cpp - 
+- The main part of the program
+- Here, taking from the reccommendations provided in the hw_shakespeare pdf, 
+  - i use an array of pointers to linked lists
+  - i use a helper function, "findNewIndex" to sort lexicographically and by length rank
+
+Overview of algorithm:
+- i first save all the tokens in shakespeare-cleaned5.txt as nodes in an array of linked lists
+- if a node with the token's data is already in the list, 
+  -the counter to the node is updated, 
+  -the node is popped from the list
+  - using the findNewIndex function, the closest element to the head that the node can be placed at is found
+  - the node is then placed to the right of said element. 
+-when this is complete, the lists are all sorted by word frequency and lexicographical order
+
+-then, i iterate line-by-line through the <INPUT FILE>
+-i tokenize the commands, and then use them to search through the array of lists to the index they provide. 
+-I then output the query word to <OUTPUT FILE>
+
+----------------------------------------------------
+
+USAGE: 
+1) Run "make", to get executable "bard".
+2) Run "./bard <INPUT FILE> <OUTPUT FILE>"
+
+Each line of INPUT FILE should have two non-negative integers. 
+- The first represents the size of the query word, and the second represents the frequecy of it's appearence. 
+Each corresponding line of OUTPUT FILE has the query word if it has been found, or a "-" if no word was found with the provided parameters.
